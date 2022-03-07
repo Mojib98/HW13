@@ -1,3 +1,8 @@
+package repository.imp;
+
+import Entity.BaseClass;
+import Entity.Employee;
+import Entity.Person;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -19,8 +24,9 @@ public class SessionFactorySingleton {
             // SessionFactory is thread safe.
             // SessionFactory is immutable.
             INSTANCE = new MetadataSources(registry)
-                    //.addAnnotatedClass()
-//                    .addAnnotatedClass(User.class)
+                    .addAnnotatedClass(Person.class)
+                    .addAnnotatedClass(BaseClass.class)
+                    .addAnnotatedClass(Employee.class)
                     .buildMetadata()
                     .buildSessionFactory();
         }

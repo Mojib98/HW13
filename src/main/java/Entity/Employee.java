@@ -16,5 +16,12 @@ import javax.persistence.InheritanceType;
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Employee extends Person{
+    private Integer EmployeeId;
+    public Employee(Integer id, String name, Integer passcode, String status,Integer e) {
+        super(id, name, passcode);
+        this.status = status;
+        this.EmployeeId = e;
+    }
+
     private String status;
 }

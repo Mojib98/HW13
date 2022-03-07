@@ -12,5 +12,10 @@ import javax.persistence.MappedSuperclass;
 @AllArgsConstructor
 @NoArgsConstructor
 public abstract class Person extends BaseClass {
+    public Person(Integer id, String name, Integer passcode) {
+        super(id, name);
+        this.passcode = passcode;
+    }
+
     private Integer passcode;
 }

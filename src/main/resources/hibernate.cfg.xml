@@ -8,5 +8,9 @@
         <property name="connection.password">1</property>
         <property name="hibernate.hbm2ddl.auto">create-drop</property> <!-- Generates Database Schema. Do not Use In PRODUCTION! -->
         <property name="show_sql">true</property>
+        <property name="dialect">org.hibernate.dialect.PostgresPlusDialect</property>
+        <property name="current_session_context_class">thread</property>
+        <property name="connection.autocommit">true</property>
+        <property name="connection.driver_class">org.postgresql.Driver</property>
     </session-factory>
 </hibernate-configuration>
