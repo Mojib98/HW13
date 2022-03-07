@@ -42,7 +42,7 @@ public class CourseRepositoryEmployee implements Repository<Course> {
     @Override
     public Course showInformation(int id) {
         try (var session = sessionFactory.openSession()) {
-            return session.find(Course.class,id);
+            return session.find(Course.class, id);
 
         }
     }

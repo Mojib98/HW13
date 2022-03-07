@@ -1,5 +1,7 @@
 import Entity.Employee;
+import Entity.Professor;
 import service.impl.employee.EmployeeServiceEmpolyee;
+import service.impl.employee.ProfessorServiceEmployee;
 
 public class MainTest {
     public static void main(String[] args) {
@@ -7,6 +9,9 @@ public class MainTest {
         EmployeeServiceEmpolyee es = new EmployeeServiceEmpolyee();
         es.add(e);
         System.out.println(es.findAll());
+        Professor p =new Professor(null,"majidi",12,"Active",null,null,"math");
+        ProfessorServiceEmployee pr = new ProfessorServiceEmployee();
+        pr.add(p);
 
     }
 }

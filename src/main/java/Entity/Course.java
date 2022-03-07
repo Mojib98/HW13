@@ -15,4 +15,8 @@ import javax.persistence.Entity;
 public class Course extends BaseCourse{
     private String ss;
 
+    public Course(Integer unit, String college, Professor professor, String ss) {
+        super(unit, college, professor);
+        this.ss = ss;
+    }
 }

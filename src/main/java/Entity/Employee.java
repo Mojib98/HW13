@@ -17,10 +17,10 @@ import javax.persistence.InheritanceType;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Employee extends Person{
     private Integer EmployeeId;
-    public Employee(Integer id, String name, Integer passcode, String status,Integer e) {
+    public Employee(Integer id, String name, Integer passcode, String status,Integer EmployeeId) {
         super(id, name, passcode);
         this.status = status;
-        this.EmployeeId = e;
+        this.EmployeeId = EmployeeId;
     }
 
     private String status;

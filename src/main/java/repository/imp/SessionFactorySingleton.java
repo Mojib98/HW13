@@ -3,6 +3,7 @@ package repository.imp;
 import Entity.BaseClass;
 import Entity.Employee;
 import Entity.Person;
+import Entity.Professor;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -27,6 +28,7 @@ public class SessionFactorySingleton {
                     .addAnnotatedClass(Person.class)
                     .addAnnotatedClass(BaseClass.class)
                     .addAnnotatedClass(Employee.class)
+                    .addAnnotatedClass(Professor.class)
                     .buildMetadata()
                     .buildSessionFactory();
         }
