@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -13,10 +15,12 @@ import javax.persistence.Entity;
 @Setter
 @Getter
 public class Course extends BaseCourse{
-    private String ss;
+    private String name;
 
-    public Course(Integer unit, String college, Professor professor, String ss) {
+    public Course(Integer unit, String college, Professor professor,String name) {
         super(unit, college, professor);
-        this.ss = ss;
+        this.name = name;
     }
+  /*  @ManyToMany
+    private Set<Student> students;*/
 }
