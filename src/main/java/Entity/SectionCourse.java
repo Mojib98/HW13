@@ -21,9 +21,15 @@ public class SectionCourse extends BaseCourse{
         this.student = student;
     }*/
 
-    private Integer tudentId;
+    public SectionCourse(Integer unit, String college, Professor professor, Student student) {
+        super(unit, college, professor);
+        this.student = student;
+    }
+
     @ManyToOne
     private Student student;
+     @ManyToOne
+   private Course course;
 
 
 }

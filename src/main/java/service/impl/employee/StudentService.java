@@ -10,12 +10,17 @@ import java.util.List;
 
 public class StudentService {
     private Integer id;
-   private Student student;
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    private Student student;
    StudentRepository studentRepository = new StudentRepository();
 
     public void add(Course course) {
         try {
-
+         student();
         SectionCourse course1 = new SectionCourse();
         course1.setName(course.getName());
         course1.setId(course.getId());
@@ -34,8 +39,16 @@ public class StudentService {
       SectionCourse c=  studentRepository.showInformation(id);
       studentRepository.remove(c);
     }
-    private Student student(){
-        return null;
+    private void student(){
+        student=studentRepository.findMyStudent(id);
+    }
+    public void showInfo(){
+        student();
+        System.out.println(student);
+    }
+    public List<SectionCourse> findAll(){
+       return studentRepository.findAll();
+
     }
 
 }

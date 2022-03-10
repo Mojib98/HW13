@@ -18,6 +18,14 @@ import javax.persistence.OneToOne;
 public abstract class BaseCourse extends BaseClass {
     private Integer unit;
     private String college;
+
+    public BaseCourse(Integer id, String name, Integer unit, String college, Professor professor) {
+        super(id, name);
+        this.unit = unit;
+        this.college = college;
+        this.professor = professor;
+    }
+
     @ManyToOne
     private Professor professor;
 }

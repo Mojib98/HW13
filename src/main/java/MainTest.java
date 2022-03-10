@@ -1,6 +1,9 @@
 import Entity.Employee;
 import Entity.Professor;
+import Entity.SectionCourse;
+import Entity.Student;
 import mangeSystem.Manage;
+import repository.imp.StudentRepository;
 import service.impl.employee.EmployeeServiceEmpolyee;
 import service.impl.employee.ProfessorServiceEmployee;
 
@@ -15,6 +18,8 @@ public class MainTest {
         pr.add(p);*/
         Manage m = new Manage();
         m.manu();
+        StudentRepository studentRepository=new StudentRepository();
+        SectionCourse sectionCourse = new SectionCourse();
 
     }
 }

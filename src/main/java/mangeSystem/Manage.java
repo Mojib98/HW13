@@ -4,10 +4,7 @@ import Entity.Course;
 import Entity.Employee;
 import Entity.Professor;
 import Entity.Student;
-import service.impl.employee.CourseServiceEmployee;
-import service.impl.employee.EmployeeServiceEmpolyee;
-import service.impl.employee.ProfessorServiceEmployee;
-import service.impl.employee.StudentServiceEmployee;
+import service.impl.employee.*;
 
 import java.util.Scanner;
 
@@ -19,6 +16,8 @@ public class Manage {
     EmployeeServiceEmpolyee employeeServiceEmpolyee = new EmployeeServiceEmpolyee();
     ProfessorServiceEmployee professorServiceEmployee = new ProfessorServiceEmployee();
     CourseServiceEmployee courseServiceEmployee = new CourseServiceEmployee();
+    StudentService studentService = new StudentService();
+    CourseService courseService;
     Student student;
     public void manu(){
      /*   System.out.println("please insert your ID");
@@ -86,10 +85,28 @@ public class Manage {
         courseServiceEmployee.add(course);
     }
     private void studentMenu(){
+        studentService.setId(id);
         boolean idRun=true;
         System.out.println("For see your information insert 1 \n" +
                 "for see your all course insert 2" +
                 "for section course insert 3");
+        int sectiom = scanner.nextInt();
+        switch (sectiom){
+            case 1:
+                studentService.showInfo();
+            case 2:
+                courseService.allCourse();
+                System.out.println("please select");
+                int s = scanner.nextInt();
+                Course course1=courseService.findCourse(id);
+                studentService.add(course1);
+            case 3:
+
+                System.out.println("please select");
+                int sect = scanner.nextInt();
+                studentService.remove(sect);
+            case 4:
+        }
     }
 
 }
