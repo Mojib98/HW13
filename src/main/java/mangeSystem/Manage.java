@@ -1,11 +1,10 @@
 package mangeSystem;
 
-import Entity.Course;
-import Entity.Employee;
-import Entity.Professor;
-import Entity.Student;
+import Entity.*;
 import service.impl.employee.*;
 
+import javax.swing.*;
+import java.util.List;
 import java.util.Scanner;
 
 public class Manage {
@@ -17,14 +16,20 @@ public class Manage {
     ProfessorServiceEmployee professorServiceEmployee = new ProfessorServiceEmployee();
     CourseServiceEmployee courseServiceEmployee = new CourseServiceEmployee();
     StudentService studentService = new StudentService();
-    CourseService courseService;
+    CourseService courseService = new CourseService();
     Student student;
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public void manu(){
      /*   System.out.println("please insert your ID");
         id = scanner.nextInt();
         System.out.println("please insert your passcode");
         password = scanner.nextInt();*/
-        employee();
+
+        studentMenu();
     }
 
     private void employee(){
@@ -85,7 +90,7 @@ public class Manage {
         courseServiceEmployee.add(course);
     }
     private void studentMenu(){
-        studentService.setId(id);
+        studentService.setId(this.id);
         boolean idRun=true;
         System.out.println("For see your information insert 1 \n" +
                 "for see your all course insert 2" +
@@ -94,14 +99,17 @@ public class Manage {
         switch (sectiom){
             case 1:
                 studentService.showInfo();
+                break;
             case 2:
-                courseService.allCourse();
+                courseService.allCourse().forEach(System.out::println);
                 System.out.println("please select");
                 int s = scanner.nextInt();
-                Course course1=courseService.findCourse(id);
+                Course course1=courseService.findCourse(s);
                 studentService.add(course1);
+                break;
             case 3:
-
+                List<SectionCourse> list = studentService.findAll();
+                list.forEach(System.out::println);
                 System.out.println("please select");
                 int sect = scanner.nextInt();
                 studentService.remove(sect);

@@ -11,23 +11,26 @@ import java.util.List;
 public class StudentService {
     private Integer id;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     private Student student;
-   StudentRepository studentRepository = new StudentRepository();
+   StudentRepository studentRepository = new StudentRepository(id);
 
     public void add(Course course) {
+        if (studentRepository.checkCourse(id,course)){
+            System.out.println("cant select this course");
+            return;
+        }
         try {
-         student();
         SectionCourse course1 = new SectionCourse();
+        student();
         course1.setName(course.getName());
         course1.setId(course.getId());
         course1.setCollege(course.getCollege());
-        course1.setProfessor(course.getProfessor());
+        //    System.out.println(course.getProfessor());
+        course1.setProfessor(course.getProfessor());//
         course1.setUnit(course.getUnit());
-        course1.setStudent(student);
+        course1.setStudent(student);//
+            course1.setCourse(course);
         studentRepository.add(course1);
 
     }catch (Exception e){
@@ -40,12 +43,17 @@ public class StudentService {
       studentRepository.remove(c);
     }
     private void student(){
-        student=studentRepository.findMyStudent(id);
+        this.student = studentRepository.findMyStudent(this.id);
     }
     public void showInfo(){
         student();
         System.out.println(student);
     }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public List<SectionCourse> findAll(){
        return studentRepository.findAll();
 

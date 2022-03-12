@@ -4,12 +4,13 @@ import Entity.Course;
 import Entity.Employee;
 import org.hibernate.SessionFactory;
 import repository.Repository;
+import service.impl.employee.EmployeeServiceEmpolyee;
 
 import java.util.List;
 
 public class CourseRepositoryEmployee implements Repository<Course> {
     SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
-
+    ProfessorRepositoryEmployee p = new ProfessorRepositoryEmployee();
     @Override
     public void add(Course course) {
         try (var session = sessionFactory.openSession()) {

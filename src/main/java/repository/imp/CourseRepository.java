@@ -11,9 +11,9 @@ public class CourseRepository {
     public List<Course> findAll(){
         List<Course> list = null;
         try (var session = sessionFactory.openSession()) {
-            String hql = "FROM Entity.Employee";
+            String hql = "FROM Entity.Course";
             var q = session.createQuery(hql, Course.class);
-            list = q.getResultList();
+            list = q.list();
         }
         return list;
 

@@ -43,7 +43,11 @@ public class ProfessorRepositoryEmployee implements Repository<Professor> {
     @Override
     public Professor showInformation(int id) {
         try (var session = sessionFactory.openSession()) {
-            return session.find(Professor.class,id);
+            String hql = "from Entity.Professor p " +
+                    "where p.EmployeeId =:id " ;
+           var s= session.createQuery(hql,Professor.class);
+          var d=  s.setParameter("id",id);
+            return d.getSingleResult();
         }
     }
 }

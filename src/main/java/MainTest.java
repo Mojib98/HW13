@@ -17,9 +17,10 @@ public class MainTest {
         ProfessorServiceEmployee pr = new ProfessorServiceEmployee();
         pr.add(p);*/
         Manage m = new Manage();
+        m.setId(4910);
         m.manu();
-        StudentRepository studentRepository=new StudentRepository();
-        SectionCourse sectionCourse = new SectionCourse();
+      //  StudentRepository studentRepository=new StudentRepository();
+       // SectionCourse sectionCourse = new SectionCourse();
 
     }
 }

@@ -12,9 +12,11 @@ public class StudentRepository implements Repository<SectionCourse> {
     SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
     private Integer id;
 
-    public void setId(Integer id) {
+    public StudentRepository(Integer id) {
         this.id = id;
     }
+
+
 
     @Override
     public void add(SectionCourse sectionCourse) {
@@ -51,8 +53,8 @@ public class StudentRepository implements Repository<SectionCourse> {
             String hql = "FROM Entity.SectionCourse c " +
                     "where c.student.id = :id";
             var q = session.createQuery(hql, SectionCourse.class);
-            session.setProperty("id",this.id);
-            list = q.getResultList();
+            q.setParameter("id",this.id);
+            list = q.list();
         }
         return list;
     }
@@ -65,12 +67,12 @@ public class StudentRepository implements Repository<SectionCourse> {
             Student student = null;
         try (var session = sessionFactory.openSession()) {
             String hql = "FROM Entity.Student c " +
-                    "where c.idStudent = :id";
+                    "where c.idStudent = :id ";
             var q = session.createQuery(hql, Student.class);
-         q.setParameter("id",this.id);
-            student = q.uniqueResult();
+        q.setParameter("id",id);
+            return q.uniqueResult();
+          //  return  student;
         }
-        return student;
     }
     private boolean checkerUnit(){
         Student student = null;
@@ -88,14 +90,14 @@ public class StudentRepository implements Repository<SectionCourse> {
         }
 
     }
-    private boolean checkCourse(int id, Course course){
+    public boolean checkCourse(int id, Course course){
         try (var session = sessionFactory.openSession()) {
-            String hql = "select c. from Entity.SectionCourse c " +
+            String hql = "select c.course.id from Entity.SectionCourse c " +
                     "where c.student.idStudent = :id";
             var q = session.createQuery(hql,Integer.class);
             q.setParameter("id",this.id);
-            var s = q.getSingleResult();
-            if (s>=18){
+            var s = q.uniqueResult();
+            if (course.getId()==s){
                 return false;
             }
             else
