@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import java.util.List;
@@ -20,7 +21,7 @@ public class SectionCourse extends BaseCourse{
         this.tudentId = tudentId;
         this.student = student;
     }*/
-
+    private Integer score;
     public SectionCourse(Integer unit, String college, Professor professor, Student student) {
         super(unit, college, professor);
         this.student = student;
@@ -28,7 +29,7 @@ public class SectionCourse extends BaseCourse{
 
     @ManyToOne
     private Student student;
-     @ManyToOne
+     @ManyToOne(fetch = FetchType.EAGER)
    private Course course;
 
 

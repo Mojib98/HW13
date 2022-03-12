@@ -16,7 +16,7 @@ public class StudentService {
    StudentRepository studentRepository = new StudentRepository(id);
 
     public void add(Course course) {
-        if (studentRepository.checkCourse(id,course)){
+        if (!studentRepository.checkCourse(course)){
             System.out.println("cant select this course");
             return;
         }

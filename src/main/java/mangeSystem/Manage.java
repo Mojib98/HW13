@@ -17,6 +17,7 @@ public class Manage {
     CourseServiceEmployee courseServiceEmployee = new CourseServiceEmployee();
     StudentService studentService = new StudentService();
     CourseService courseService = new CourseService();
+    ProfessorService professorService = new ProfessorService();
     Student student;
 
     public void setId(Integer id) {
@@ -28,8 +29,8 @@ public class Manage {
         id = scanner.nextInt();
         System.out.println("please insert your passcode");
         password = scanner.nextInt();*/
-
-        studentMenu();
+//        employee();
+       studentMenu();
     }
 
     private void employee(){
@@ -116,5 +117,18 @@ public class Manage {
             case 4:
         }
     }
+    private void professorMenu(){
+       boolean isRun = true;
+        System.out.println("\tfor insert score select 1\n" +
+                "\tfor see your salary  and information select 2");
+        int selection = scanner.nextInt();
+        switch (selection){
+            case 1:
 
+            case 2:
+            case 3:
+
+        }
+
+    }
 }

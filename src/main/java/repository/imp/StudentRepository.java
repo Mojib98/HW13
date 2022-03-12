@@ -90,18 +90,21 @@ public class StudentRepository implements Repository<SectionCourse> {
         }
 
     }
-    public boolean checkCourse(int id, Course course){
+    public boolean checkCourse( Course course){
         try (var session = sessionFactory.openSession()) {
             String hql = "select c.course.id from Entity.SectionCourse c " +
                     "where c.student.idStudent = :id";
             var q = session.createQuery(hql,Integer.class);
             q.setParameter("id",this.id);
             var s = q.uniqueResult();
-            if (course.getId()==s){
+           // System.out.println("s = " + s);
+           // System.out.println(course.getId());
+            if (course.getId().equals(s)){
                 return false;
             }
-            else
+            else if (s ==null)
                 return true;
         }
+        return true;
     }
 }
