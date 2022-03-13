@@ -30,6 +30,7 @@ public class MainTest {
       //  professorService.setId(2517);
       //List<SectionCourse> k =  professorService.myStudent();
       professorService.insertScore(1,16);
+      Professor professor = new Professor();
      //   System.out.println(k);
               //  StudentRepository studentRepository=new StudentRepository();
        // SectionCourse sectionCourse = new SectionCourse();

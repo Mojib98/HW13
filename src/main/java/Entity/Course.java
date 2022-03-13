@@ -15,6 +15,7 @@ import java.util.Set;
 @Setter
 @Getter
 public class Course extends BaseCourse{
+
     private String name;
 
     public Course(Integer unit, String college, Professor professor,String name) {
