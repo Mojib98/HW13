@@ -12,9 +12,13 @@ import java.util.List;
 
 public class ProfessorService {
     private int id;
-    SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
-    ProfessRepository professRepository = new ProfessRepository();
+    SessionFactory sessionFactory;
+    ProfessRepository professRepository;
 
+    public ProfessorService() {
+        professRepository = new ProfessRepository();
+        sessionFactory = SessionFactorySingleton.getInstance();
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -51,6 +55,11 @@ public class ProfessorService {
         return list;
     }
     public Professor myInfo(){
-        return null;
+        Professor professor=professRepository.myInfo();
+        if (professor.getStatus().equals("ft")){
+            Long unit = professRepository.myUnit();
+            professor.setAllUnit(unit);
+        }
+        return professor;
+        }
     }
-}

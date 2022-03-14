@@ -209,7 +209,7 @@ public class Manage {
         while (isRun) {
             boolean idRun = true;
             System.out.println("\tFor see your information insert 1 \n" +
-                    "\tfor see your all course insert 2" +
+                    "\tfor see your all course insert 2\n" +
                     "\tfor section course insert 3\n" +
                     "\tfor remove insert 4\n" +
                     "\tfor exit insert 5");
@@ -220,16 +220,24 @@ public class Manage {
                     System.out.println(student1);
                     break;
                 case 2:
+                    List<SectionCourse> list1 = studentService.findAll();
+                    list1.stream().forEach(System.out::println);
+                    break;
                 case 3:
-                    courseService.allCourse().forEach(System.out::println);
+                    courseService.allCourse().stream().forEach(System.out::println);
                     System.out.println("please select by id");
                     int s = scanner.nextInt();
                     Course course1 = courseService.findCourse(s);
-                    studentService.add(course1);
+                    try {
+
+                        studentService.add(course1);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                     break;
                 case 4:
                     List<SectionCourse> list = studentService.findAll();
-                    list.forEach(System.out::println);
+                    list.stream().forEach(System.out::println);
                     System.out.println("please select");
                     int sect = scanner.nextInt();
                     studentService.remove(sect);
@@ -242,18 +250,35 @@ public class Manage {
 
     private void professorMenu() {
         boolean isRun = true;
+        professorService.setId(this.id);
+        while (isRun){
         System.out.println("\tfor insert score select 1\n" +
                 "\tfor see your salary  and information select 2");
         int selection = scanner.nextInt();
         switch (selection) {
             case 1:
-
+                List<SectionCourse> list=professorService.myStudent();
+                list.stream().forEach(System.out::println);
+                System.out.println("\tplease insert id");
+                int idS=scanner.nextInt();
+                System.out.println("please insert score");
+                int score = scanner.nextInt();
+                professorService.insertScore(idS,score);
+                break;
             case 2:
+                Professor professor = professorService.myInfo();
+                if (professor.getStatus().equals("ft")){
+                    System.out.println("salary = "+professor.getAllUnit()*1000);
+                    System.out.println(professor);
+                }else {
+                    System.out.println("salary = "+10000);
+                    System.out.println(professor);
+                }
             case 3:
 
         }
 
-    }
+    }}
 
     private Professor findProfessor() {
         System.out.println("please insert professor Id");

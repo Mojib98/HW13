@@ -1,5 +1,6 @@
 package repository.imp;
 
+import Entity.Professor;
 import Entity.SectionCourse;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -31,25 +32,29 @@ public class ProfessRepository {
          }
     public List<SectionCourse> myStudent(){
         var session = sessionFactory.getCurrentSession();
-    //    session.getTransaction();
-       // System.out.println(session.isOpen());
-       var t= session.getTransaction();
-       t.begin();
         String hql = " from Entity.SectionCourse e where e.professor.EmployeeId =2517" ;
         System.out.println("df");
         var s =session.createQuery(hql,SectionCourse.class);
-       //s.setParameter("id",this.id);
         System.out.println(s.list()+" 1");
       return s.getResultList();
     }
 
-    public int myUnit(){
+    public Long myUnit(){
         Session session = sessionFactory.getCurrentSession();
         String hql = " select sum(e.unit) from Entity.SectionCourse e" +
                 " where e.professor.EmployeeId =: id" ;
-        var s =session.createQuery(hql,Integer.class);
+        var s =session.createQuery(hql,Long.class);
         s.setParameter("id",this.id);
         return s.getSingleResult();
+    }
+    public Professor myInfo(){
+        Session session = sessionFactory.getCurrentSession();
+        String hql = " from Entity.Professor e" +
+                " where e.EmployeeId =: id" ;
+        var s =session.createQuery(hql,Professor.class);
+        s.setParameter("id",this.id);
+        return s.uniqueResult();
+
     }
 
 

@@ -20,7 +20,8 @@ public class StudentService {
 
 
     public StudentService(Integer id) {
-        studentRepository = new StudentRepository(this.id);
+        this.id=id;
+        studentRepository = new StudentRepository(id);
         sessionFactory = SessionFactorySingleton.getInstance();
     }
 
@@ -109,19 +110,22 @@ public class StudentService {
 
     }
     private boolean checkUnit(Integer check){
-        Integer unit = null;
+        Long unit = null;
         try (var session = sessionFactory.getCurrentSession()) {
             var t = session.getTransaction();
             try {
                 t.begin();
                 unit = studentRepository.checkerUnit();
+                t.commit();
             } catch (Exception e) {
+                e.printStackTrace();
                 t.rollback();
-                System.out.println("dont remove");
+                System.out.println("cant check unit");
                 return true;
             }
 
         }
+        System.out.println("check unit "+unit);
         if(unit == null){
             return true;
         }
@@ -139,10 +143,13 @@ public class StudentService {
                 t.begin();
                check= studentRepository.checkCourse(course);
             } catch (Exception e) {
+                e.printStackTrace();
                 t.rollback();
-                System.out.println("dont remove");
+                System.out.println("cant check course");
                 return false;
             }
+            System.out.println(check+" " +
+                    "course");
         if (check !=null){
             return true;
         }

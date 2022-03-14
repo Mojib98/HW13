@@ -49,7 +49,13 @@ public class StudentRepository implements Repository<SectionCourse> {
 
     @Override
     public SectionCourse showInformation(int id) {
-        return null;
+        SectionCourse sectionCourse = null;
+        var session = sessionFactory.getCurrentSession();
+        String hql = "FROM Entity.SectionCourse c " +
+                "where id = :id ";
+        var q = session.createQuery(hql, SectionCourse.class);
+        q.setParameter("id", id);
+        return q.uniqueResult();
     }
 
     public Student findMyStudent(Integer id) {
@@ -63,14 +69,15 @@ public class StudentRepository implements Repository<SectionCourse> {
         //  return  student;
     }
 
-    public Integer checkerUnit() {
-        Student student = null;
+    public Long checkerUnit() {
         var session = sessionFactory.getCurrentSession();
         String hql = "select sum(c.unit) from Entity.SectionCourse c " +
                 "where c.student.idStudent = :id";
-        var q = session.createQuery(hql, Integer.class);
+        var q = session.createQuery(hql, Long.class);
         q.setParameter("id", this.id);
+      //  System.out.println(s);
         var s = q.getSingleResult();
+        System.out.println(s);
         return s;
     }
 
@@ -82,8 +89,9 @@ public class StudentRepository implements Repository<SectionCourse> {
         var q = session.createQuery(hql, Integer.class);
         q.setParameter("id", this.id);
         var s = q.uniqueResult();
-        // System.out.println("s = " + s);
+        System.out.println("s = " + s);
         // System.out.println(course.getId());
+
        return s;
     }
 }
