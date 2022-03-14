@@ -3,6 +3,8 @@ package service.impl;
 import Entity.Course;
 import Entity.SectionCourse;
 import Entity.Student;
+import org.hibernate.SessionFactory;
+import repository.imp.SessionFactorySingleton;
 import repository.imp.StudentRepository;
 import service.Service;
 
@@ -12,15 +14,21 @@ public class StudentService {
     private Integer id;
 
 
-    private Student student;
-   StudentRepository studentRepository = new StudentRepository(id);
+    private Student student = null;
+    private StudentRepository studentRepository;
+    SessionFactory sessionFactory;
+
+
+    public StudentService(Integer id) {
+        studentRepository = new StudentRepository(this.id);
+        sessionFactory = SessionFactorySingleton.getInstance();
+    }
 
     public void add(Course course) {
-        if (!studentRepository.checkCourse(course)){
+        if (checkCourse(course) & checkUnit(course.getUnit())) {
             System.out.println("cant select this course");
             return;
         }
-        try {
         SectionCourse course1 = new SectionCourse();
         student();
         course1.setName(course.getName());
@@ -30,33 +38,116 @@ public class StudentService {
         course1.setProfessor(course.getProfessor());//
         course1.setUnit(course.getUnit());
         course1.setStudent(student);//
-            course1.setCourse(course);
-        studentRepository.add(course1);
-
-    }catch (Exception e){
-            System.out.println("dont added");
+        course1.setCourse(course);
+        try (var session = sessionFactory.getCurrentSession()) {
+            var t = session.getTransaction();
+            try {
+                t.begin();
+                studentRepository.add(course1);
+                t.commit();
+            } catch (Exception e) {
+                t.rollback();
+                System.out.println("dont added");
+            }
         }
 
+
     }
-    public void remove(int id){
-      SectionCourse c=  studentRepository.showInformation(id);
-      studentRepository.remove(c);
+
+    public void remove(int id) {
+        try (var session = sessionFactory.getCurrentSession()) {
+            var t = session.getTransaction();
+            try {
+                t.begin();
+                SectionCourse c = studentRepository.showInformation(id);
+                studentRepository.remove(c);
+                t.commit();
+            } catch (Exception e) {
+                t.rollback();
+                System.out.println("dont remove");
+            }
+        }
     }
-    private void student(){
-        this.student = studentRepository.findMyStudent(this.id);
+
+    private void student() {
+        try (var session = sessionFactory.getCurrentSession()) {
+            var t = session.getTransaction();
+            try {
+                t.begin();
+                this.student = studentRepository.findMyStudent(this.id);
+                t.commit();
+            } catch (Exception e) {
+                t.rollback();
+                System.out.println("dont remove");
+            }
+
+        }
     }
-    public void showInfo(){
+
+    public Student showInfo() {
         student();
-        System.out.println(student);
+        return this.student;
     }
 
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public List<SectionCourse> findAll(){
-       return studentRepository.findAll();
+    public List<SectionCourse> findAll() {
+        try (var session = sessionFactory.getCurrentSession()) {
+            var t = session.getTransaction();
+            try {
+                t.begin();
+                return studentRepository.findAll();
+            } catch (Exception e) {
+                t.rollback();
+                System.out.println("dont remove");
+                return null;
+            }
+
+        }
 
     }
+    private boolean checkUnit(Integer check){
+        Integer unit = null;
+        try (var session = sessionFactory.getCurrentSession()) {
+            var t = session.getTransaction();
+            try {
+                t.begin();
+                unit = studentRepository.checkerUnit();
+            } catch (Exception e) {
+                t.rollback();
+                System.out.println("dont remove");
+                return true;
+            }
 
+        }
+        if(unit == null){
+            return true;
+        }
+        if (unit+check>18){
+            return false;
+        }else {
+            return true;
+        }
+    }
+    private boolean checkCourse(Course course){
+        Integer check = null;
+        try (var session = sessionFactory.getCurrentSession()) {
+            var t = session.getTransaction();
+            try {
+                t.begin();
+               check= studentRepository.checkCourse(course);
+            } catch (Exception e) {
+                t.rollback();
+                System.out.println("dont remove");
+                return false;
+            }
+        if (check !=null){
+            return true;
+        }
+        else return false;
+    }
+
+}
 }

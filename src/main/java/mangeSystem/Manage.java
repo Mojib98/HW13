@@ -27,7 +27,7 @@ public class Manage {
         employeeServiceEmpolyee = new EmployeeServiceEmpolyee();
         studentServiceEmployee = new StudentServiceEmployee();
         courseServiceEmployee = new CourseServiceEmployee();
-        studentService = new StudentService();
+
         employeeSystem = new EmployeeSystem();
         courseService = new CourseService();
         loginService = new LoginService();
@@ -204,33 +204,38 @@ public class Manage {
     }
 
     private void studentMenu() {
+        studentService = new StudentService(this.id);
         boolean isRun = true;
         while (isRun) {
-            studentService.setId(this.id);
             boolean idRun = true;
-            System.out.println("For see your information insert 1 \n" +
-                    "for see your all course insert 2" +
-                    "for section course insert 3");
+            System.out.println("\tFor see your information insert 1 \n" +
+                    "\tfor see your all course insert 2" +
+                    "\tfor section course insert 3\n" +
+                    "\tfor remove insert 4\n" +
+                    "\tfor exit insert 5");
             int sectiom = scanner.nextInt();
             switch (sectiom) {
                 case 1:
-                    studentService.showInfo();
+                  Student student1=  studentService.showInfo();
+                    System.out.println(student1);
                     break;
                 case 2:
+                case 3:
                     courseService.allCourse().forEach(System.out::println);
-                    System.out.println("please select");
+                    System.out.println("please select by id");
                     int s = scanner.nextInt();
                     Course course1 = courseService.findCourse(s);
                     studentService.add(course1);
                     break;
-                case 3:
+                case 4:
                     List<SectionCourse> list = studentService.findAll();
                     list.forEach(System.out::println);
                     System.out.println("please select");
                     int sect = scanner.nextInt();
                     studentService.remove(sect);
                     break;
-                case 4:
+                case 5:
+                    idRun =false;
             }
         }
     }
