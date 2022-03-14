@@ -1,9 +1,6 @@
 package Entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
@@ -14,6 +11,7 @@ import javax.persistence.InheritanceType;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Employee extends Person{
     private Integer EmployeeId;

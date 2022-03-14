@@ -1,9 +1,6 @@
 package Entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -15,6 +12,7 @@ import javax.persistence.OneToOne;
 @AllArgsConstructor
 @NoArgsConstructor
 @MappedSuperclass
+@ToString
 public abstract class BaseCourse extends BaseClass {
     private Integer unit;
     private String college;

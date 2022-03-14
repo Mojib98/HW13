@@ -1,27 +1,19 @@
 package repository.imp;
 
 import Entity.Course;
-import Entity.Employee;
 import org.hibernate.SessionFactory;
 import repository.Repository;
-import service.impl.employee.EmployeeServiceEmpolyee;
 
 import java.util.List;
 
 public class CourseRepositoryEmployee implements Repository<Course> {
     SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
     ProfessorRepositoryEmployee p = new ProfessorRepositoryEmployee();
+
     @Override
     public void add(Course course) {
-        try (var session = sessionFactory.openSession()) {
-            var t = session.getTransaction();
-            try {
-                session.save(course);
-                t.commit();
-            } catch (Exception e) {
-                t.rollback();
-            }
-        }
+        var session = sessionFactory.getCurrentSession();
+        session.save(course);
     }
 
     @Override
@@ -32,19 +24,22 @@ public class CourseRepositoryEmployee implements Repository<Course> {
     @Override
     public List<Course> findAll() {
         List<Course> list = null;
-        try (var session = sessionFactory.openSession()) {
-            String hql = "FROM Entity.Employee";
-            var q = session.createQuery(hql, Course.class);
-            list = q.getResultList();
-        }
+        var session = sessionFactory.getCurrentSession();
+        String hql = "FROM Entity.Course";
+        var q = session.createQuery(hql, Course.class);
+        list = q.getResultList();
         return list;
     }
 
     @Override
     public Course showInformation(int id) {
-        try (var session = sessionFactory.openSession()) {
-            return session.find(Course.class, id);
-
-        }
+        Course course = null;
+        var session = sessionFactory.getCurrentSession();
+        String hql = "FROM Entity.Course" +
+                " where id=:id";
+        var query = session.createQuery(hql, Course.class);
+        query.setParameter("id",id);
+        course = query.uniqueResult();
+        return course;
     }
 }

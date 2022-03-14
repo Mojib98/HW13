@@ -1,8 +1,5 @@
 package Entity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.MappedSuperclass;
 
@@ -11,6 +8,7 @@ import javax.persistence.MappedSuperclass;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public abstract class Person extends BaseClass {
     public Person(Integer id, String name, Integer passcode) {
         super(id, name);

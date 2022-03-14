@@ -1,4 +1,4 @@
-package service.impl.employee;
+package service.impl;
 
 import Entity.Professor;
 import Entity.SectionCourse;

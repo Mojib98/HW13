@@ -1,4 +1,4 @@
-package service.impl.employee;
+package service.impl;
 
 import org.hibernate.SessionFactory;
 import repository.LoginRepository;
@@ -9,7 +9,7 @@ public class LoginService {
     SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
 
     public boolean checking(Integer id,Integer passcode){
-        if(id>=4000){
+        if(id >= 4000){
             return student(id,passcode);
         }
         else {
@@ -17,9 +17,10 @@ public class LoginService {
         }
     }
     private boolean student(Integer id,Integer passcode){
-        try (var session = sessionFactory.openSession()) {
+        try (var session = sessionFactory.getCurrentSession()) {
             var t = session.getTransaction();
             try {
+                t.begin();
                 return loginRepository.student(id,passcode);
             } catch (Exception e) {
                 t.rollback();
@@ -30,11 +31,13 @@ public class LoginService {
 
     }
     private boolean employee(Integer id,Integer passcode){
-        try (var session = sessionFactory.openSession()) {
+        try (var session = sessionFactory.getCurrentSession()) {
             var t = session.getTransaction();
             try {
+                t.begin();
                 return loginRepository.employee(id,passcode);
             } catch (Exception e) {
+                e.printStackTrace();
                 t.rollback();
                 return false;
 

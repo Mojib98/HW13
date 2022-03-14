@@ -25,7 +25,7 @@ public class EmployeeSystem {
         String name = scanner.next();
         System.out.println("please insert college");
         String college = scanner.next();
-        employee = new Employee(null,name,12,"ACTIVE",null);
+        employee = new Employee(null,name,null,"ACTIVE",null);
         return employee;
     }
     public Professor professorSingUp(){
