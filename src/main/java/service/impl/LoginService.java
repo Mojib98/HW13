@@ -12,9 +12,10 @@ public class LoginService {
         if(id >= 4000){
             return student(id,passcode);
         }
-        else {
+        else if (id >=1000 & id<=3999){
             return employee(id,passcode);
         }
+        else return false;
     }
     private boolean student(Integer id,Integer passcode){
         try (var session = sessionFactory.getCurrentSession()) {
