@@ -10,19 +10,19 @@ public class CourseRepository {
 
     public List<Course> findAll(){
         List<Course> list = null;
-        try (var session = sessionFactory.openSession()) {
+       var session = sessionFactory.getCurrentSession();
             String hql = "FROM Entity.Course";
             var q = session.createQuery(hql, Course.class);
             list = q.list();
-        }
+
         return list;
 
     }
     public Course findCourse(int id){
-        try (var session = sessionFactory.openSession()) {
+        var session = sessionFactory.getCurrentSession();
             return session.find(Course.class, id);
 
-        }
+
 
     }
 }
