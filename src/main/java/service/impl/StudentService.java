@@ -18,6 +18,8 @@ public class StudentService {
     private StudentRepository studentRepository;
     SessionFactory sessionFactory;
 
+    public StudentService() {
+    }
 
     public StudentService(Integer id) {
         this.id=id;
