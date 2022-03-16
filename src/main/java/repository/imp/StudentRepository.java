@@ -84,9 +84,10 @@ public class StudentRepository implements Repository<SectionCourse> {
     public Integer checkCourse(Course course) {
         var session = sessionFactory.getCurrentSession();
         String hql = "select c.course.id from Entity.SectionCourse c " +
-                "where c.student.idStudent = :id";
+                "where c.student.idStudent = :id and c.course.id =:ids";
         var q = session.createQuery(hql, Integer.class);
         q.setParameter("id", this.id);
+        q.setParameter("ids",course.getId());
         var s = q.getSingleResult();
         System.out.println("s = " + s);
         // System.out.println(course.getId());
