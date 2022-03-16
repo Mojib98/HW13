@@ -41,11 +41,12 @@ public class ProfessorService {
     }
     public List<SectionCourse> myStudent(){
         List<SectionCourse> list = null;
-        try(var seesion=sessionFactory.openSession()){
+        try(var seesion=sessionFactory.getCurrentSession()){
             var t = seesion.getTransaction();
             try {
                 t.begin();
                list= professRepository.myStudent();
+               t.commit();
             }catch (Exception e){
                 e.printStackTrace();
                 t.rollback();
@@ -55,10 +56,22 @@ public class ProfessorService {
         return list;
     }
     public Professor myInfo(){
-        Professor professor=professRepository.myInfo();
-        if (professor.getStatus().equals("ft")){
-            Long unit = professRepository.myUnit();
-            professor.setAllUnit(unit);
+        Professor professor;
+        try(var seesion=sessionFactory.getCurrentSession()){
+            var t = seesion.getTransaction();
+            try {
+                t.begin();
+                professor = professRepository.myInfo();
+                if (professor.getStatus().equals("ft")) {
+                    Long unit = professRepository.myUnit();
+                    professor.setAllUnit(unit);
+                    t.commit();
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+                t.rollback();
+                return null;
+            }
         }
         return professor;
         }

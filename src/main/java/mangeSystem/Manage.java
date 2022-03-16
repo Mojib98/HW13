@@ -268,7 +268,7 @@ public class Manage {
             case 2:
                 Professor professor = professorService.myInfo();
                 if (professor.getStatus().equals("ft")){
-                    System.out.println("salary = "+professor.getAllUnit()*1000);
+                    System.out.println("salary = "+professor.getAllUnit()*10000);
                     System.out.println(professor);
                 }else {
                     System.out.println("salary = "+10000);
@@ -289,7 +289,7 @@ public class Manage {
     }
 
     private void allProfessor() {
-        List<Professor> list = professorServiceEmployee.findAll();
+        List<Employee> list = professorServiceEmployee.findAll();
         list.stream().forEach(System.out::println);
     }
 }

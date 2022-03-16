@@ -34,16 +34,15 @@ public class StudentRepository implements Repository<SectionCourse> {
         session.remove(sectionCourse);
     }
 
-    @Override
+    //@Override
     public List<SectionCourse> findAll() {
         List<SectionCourse> list = null;
         var session = sessionFactory.getCurrentSession();
         String hql = "FROM Entity.SectionCourse c " +
-                "where c.student.id = :id";
+                "where c.student.idStudent = :id";
         var q = session.createQuery(hql, SectionCourse.class);
         q.setParameter("id", this.id);
-        list = q.list();
-
+        list = q.getResultList();
         return list;
     }
 
@@ -77,7 +76,7 @@ public class StudentRepository implements Repository<SectionCourse> {
         q.setParameter("id", this.id);
       //  System.out.println(s);
         var s = q.getSingleResult();
-        System.out.println(s);
+      //  System.out.println(s);
         return s;
     }
 

@@ -1,4 +1,5 @@
 package repository.imp;
+import Entity.Employee;
 import Entity.Professor;
 import org.hibernate.SessionFactory;
 import repository.Repository;
@@ -25,12 +26,12 @@ public class ProfessorRepositoryEmployee implements Repository<Professor> {
 
     }
 
-    @Override
-    public List<Professor> findAll() {
-        List<Professor> list = null;
+    //@Override
+    public List<Employee> findAll() {
+        List<Employee> list = null;
         var session = sessionFactory.getCurrentSession();
-            String hql = "FROM Entity.Employee";
-            var q = session.createQuery(hql, Professor.class);
+            String hql = "FROM Entity.Professor";
+            var q = session.createQuery(hql);
             list = q.getResultList();
 
         return list;

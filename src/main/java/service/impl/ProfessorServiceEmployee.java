@@ -45,9 +45,9 @@ public class ProfessorServiceEmployee implements Service<Professor> {
 
     }
 
-    @Override
-    public List<Professor> findAll() {
-        List<Professor> list = null;
+    //@Override
+    public List<Employee> findAll() {
+        List<Employee> list = null;
         try (var session = sessionFactory.getCurrentSession()) {
             var t = session.getTransaction();
             try {

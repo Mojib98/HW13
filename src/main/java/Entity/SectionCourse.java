@@ -23,7 +23,7 @@ public class SectionCourse extends BaseCourse{
         this.student = student;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Student student;
      @ManyToOne(fetch = FetchType.EAGER)
    private Course course;

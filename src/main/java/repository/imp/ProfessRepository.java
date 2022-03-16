@@ -41,7 +41,7 @@ public class ProfessRepository {
 
     public Long myUnit(){
         Session session = sessionFactory.getCurrentSession();
-        String hql = " select sum(e.unit) from Entity.SectionCourse e" +
+        String hql = " select sum(e.unit) from Entity.Course e" +
                 " where e.professor.EmployeeId =: id" ;
         var s =session.createQuery(hql,Long.class);
         s.setParameter("id",this.id);

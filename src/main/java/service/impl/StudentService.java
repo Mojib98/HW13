@@ -104,7 +104,6 @@ public class StudentService {
                 return studentRepository.findAll();
             } catch (Exception e) {
                 t.rollback();
-                System.out.println("dont remove");
                 return null;
             }
 
@@ -132,9 +131,9 @@ public class StudentService {
             return true;
         }
         if (unit+check>18){
-            return false;
-        }else {
             return true;
+        }else {
+            return false;
         }
     }
     private boolean checkCourse(Course course){

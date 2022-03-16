@@ -8,7 +8,15 @@ import service.impl.ProfessorService;
 public class MainTest {
     public static void main(String[] args) {
         Manage m = new Manage();
-        m.manu();
-
+        while (true) {
+            try {
+                m.manu();
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("\t\t!!!SOME THING WRONG DO AGAIN!!! ");
+                continue;
+            }
+        }
     }
+
 }
