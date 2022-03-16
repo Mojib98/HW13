@@ -207,7 +207,6 @@ public class Manage {
         studentService = new StudentService(this.id);
         boolean isRun = true;
         while (isRun) {
-            boolean idRun = true;
             System.out.println("\tFor see your information insert 1 \n" +
                     "\tfor see your all course insert 2\n" +
                     "\tfor section course insert 3\n" +
@@ -224,7 +223,8 @@ public class Manage {
                     list1.stream().forEach(System.out::println);
                     break;
                 case 3:
-                    courseService.allCourse().stream().forEach(System.out::println);
+                   var list= courseService.allCourse();
+                   list.forEach(System.out::println);
                     System.out.println("please select by id");
                     int s = scanner.nextInt();
                     Course course1 = courseService.findCourse(s);
@@ -236,14 +236,14 @@ public class Manage {
                     }
                     break;
                 case 4:
-                    List<SectionCourse> list = studentService.findAll();
-                    list.stream().forEach(System.out::println);
+                    List<SectionCourse> list4 = studentService.findAll();
+                    list4.stream().forEach(System.out::println);
                     System.out.println("please select");
                     int sect = scanner.nextInt();
                     studentService.remove(sect);
                     break;
                 case 5:
-                    idRun =false;
+                    isRun =false;
             }
         }
     }

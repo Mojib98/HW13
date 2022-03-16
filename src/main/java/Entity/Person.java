@@ -8,7 +8,6 @@ import javax.persistence.MappedSuperclass;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public abstract class Person extends BaseClass {
     public Person(Integer id, String name, Integer passcode) {
         super(id, name);
@@ -16,4 +15,11 @@ public abstract class Person extends BaseClass {
     }
 
     private Integer passcode;
+
+    @Override
+    public String toString() {
+        return   super.toString()+
+                "\tpasscode=" + passcode
+                 ;
+    }
 }

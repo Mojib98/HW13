@@ -28,7 +28,7 @@ public class StudentService {
     }
 
     public void add(Course course) {
-        if (checkCourse(course) & checkUnit(course.getUnit())) {
+        if (checkCourse(course) && checkUnit(course.getUnit())) {
             System.out.println("cant select this course");
             return;
         }
@@ -97,15 +97,17 @@ public class StudentService {
     }
 
     public List<SectionCourse> findAll() {
+        List<SectionCourse> list=null;
         try (var session = sessionFactory.getCurrentSession()) {
             var t = session.getTransaction();
             try {
                 t.begin();
-                return studentRepository.findAll();
+                list= studentRepository.findAll();
             } catch (Exception e) {
                 t.rollback();
                 return null;
             }
+            return list;
 
         }
 
@@ -151,7 +153,7 @@ public class StudentService {
             }
             System.out.println(check+" " +
                     "course");
-        if (check !=null){
+        if (course.getId().equals(check)){
             return true;
         }
         else return false;

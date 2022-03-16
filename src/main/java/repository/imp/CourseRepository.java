@@ -13,7 +13,7 @@ public class CourseRepository {
        var session = sessionFactory.getCurrentSession();
             String hql = "FROM Entity.Course";
             var q = session.createQuery(hql, Course.class);
-            list = q.list();
+            list = q.getResultList();
 
         return list;
 

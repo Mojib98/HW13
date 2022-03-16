@@ -11,7 +11,6 @@ import java.util.Set;
 @NoArgsConstructor
 @Setter
 @Getter
-@ToString
 public class Course extends BaseCourse{
 
     private String name;
@@ -22,4 +21,11 @@ public class Course extends BaseCourse{
     }
   /*  @ManyToMany
     private Set<Student> students;*/
+
+    @Override
+    public String toString() {
+        return  super.toString()+"\n\tCourse{" +
+                "\tname='" + name + '\'' +
+                "\t} "  ;
+    }
 }

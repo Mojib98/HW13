@@ -87,7 +87,7 @@ public class StudentRepository implements Repository<SectionCourse> {
                 "where c.student.idStudent = :id";
         var q = session.createQuery(hql, Integer.class);
         q.setParameter("id", this.id);
-        var s = q.uniqueResult();
+        var s = q.getSingleResult();
         System.out.println("s = " + s);
         // System.out.println(course.getId());
 

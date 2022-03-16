@@ -12,10 +12,16 @@ import javax.persistence.MappedSuperclass;
 @AllArgsConstructor
 @NoArgsConstructor
 @MappedSuperclass
-@ToString
 public abstract class BaseClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+
+    @Override
+    public String toString() {
+        return
+                "\tid=" + id +
+                "\tname='" + name + "  ";
+    }
 }

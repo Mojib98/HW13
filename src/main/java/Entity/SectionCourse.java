@@ -10,7 +10,6 @@ import javax.persistence.ManyToOne;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@ToString
 public class SectionCourse extends BaseCourse{
   /*  public SectionCourse(Integer unit, String college, Entity.Professor professor, Integer tudentId, Entity.Student student) {
         super(unit, college, professor);
@@ -28,5 +27,12 @@ public class SectionCourse extends BaseCourse{
      @ManyToOne(fetch = FetchType.EAGER)
    private Course course;
 
-
+    @Override
+    public String toString() {
+        return super.toString()+"\tSectionCourse{" +
+                "\tscore=" + score +
+                "\t, student=" + student +
+                "\t, course=" + course +
+                "\t} " ;
+    }
 }

@@ -13,7 +13,6 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class Student extends Person {
     private String college;
     private Integer allUnit;
@@ -32,5 +31,12 @@ public class Student extends Person {
         )
         private Set<SectionCourse> courseSet;*/
 
-
+    @Override
+    public String toString() {
+        return  super.toString()+"\tStudent{" +
+                "\tcollege='" + college + '\'' +
+                "\t, allUnit=" + allUnit +
+                "\t, idStudent=" + idStudent +
+                "\t} " ;
+    }
 }

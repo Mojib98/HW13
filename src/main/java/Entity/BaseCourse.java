@@ -12,7 +12,6 @@ import javax.persistence.OneToOne;
 @AllArgsConstructor
 @NoArgsConstructor
 @MappedSuperclass
-@ToString
 public abstract class BaseCourse extends BaseClass {
     private Integer unit;
     private String college;
@@ -26,4 +25,12 @@ public abstract class BaseCourse extends BaseClass {
 
     @ManyToOne
     private Professor professor;
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                "\tunit=" + unit +
+                "\t, college='" + college + '\'' +
+                "\t, professor=" + professor;
+    }
 }

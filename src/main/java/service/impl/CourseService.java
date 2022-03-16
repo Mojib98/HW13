@@ -25,7 +25,9 @@ public class CourseService {
            list = courseRepository.findAll();
            t.commit();
         return list;
-    }}
+    }
+
+    }
     public Course findCourse(int id) {
         List<Course> list = null;
         try (var session = sessionFactory.getCurrentSession()) {

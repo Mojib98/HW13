@@ -11,7 +11,6 @@ import javax.persistence.InheritanceType;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Employee extends Person{
     private Integer EmployeeId;
@@ -19,6 +18,14 @@ public class Employee extends Person{
         super(id, name, passcode);
         this.status = status;
         this.EmployeeId = EmployeeId;
+    }
+
+    @Override
+    public String toString() {
+        return  super.toString()+"\n\tEmployee{" +
+                "\tEmployeeId=" + EmployeeId +
+                "\t, status='" + status + '\'' +
+                "\t} ";
     }
 
     private String status;

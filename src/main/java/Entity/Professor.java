@@ -9,10 +9,19 @@ import javax.persistence.Entity;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@ToString
+
 public class Professor extends Employee {
     private Long allUnit;
     private String college;
+
+    @Override
+    public String toString() {
+        return  super.toString()
+        +       "\tProfessor{" +
+                "\tallUnit=" + allUnit +
+                "\t, college='" + college + '\'' +
+                "\t} " ;
+    }
 
     public Professor(Integer id, String name, Integer passcode, String status, Integer code, Long allUnit, String college) {
         super(id, name, passcode, status, code);
