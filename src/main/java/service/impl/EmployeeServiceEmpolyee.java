@@ -12,13 +12,11 @@ import java.util.Random;
 public class EmployeeServiceEmpolyee implements Service<Employee> {
     EmployeeRepositoryEmployee employeeRepositoryEmployee;
     SessionFactory sessionFactory;
-
     public EmployeeServiceEmpolyee() {
         sessionFactory = SessionFactorySingleton.getInstance();
         employeeRepositoryEmployee = new EmployeeRepositoryEmployee();
 
     }
-
     @Override
     public void add(Employee employee) {
         Random random = new Random();

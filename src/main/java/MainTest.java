@@ -1,3 +1,4 @@
+import Entity.BaseClass;
 import Entity.Employee;
 import Entity.Professor;
 import mangeSystem.Manage;
@@ -7,6 +8,7 @@ import service.impl.ProfessorService;
 
 public class MainTest {
     public static void main(String[] args) {
+     //   BaseClass b =new Employee();
         Manage m = new Manage();
         while (true) {
             try {

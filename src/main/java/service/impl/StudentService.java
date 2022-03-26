@@ -28,10 +28,10 @@ public class StudentService {
     }
 
     public void add(Course course) {
-        if (checkCourse(course) && checkUnit(course.getUnit())) {
+      /*  if (*//*checkCourse(course) &*//* checkUnit(course.getUnit())) {
             System.out.println("cant select this course");
             return;
-        }
+        }*/
         SectionCourse course1 = new SectionCourse();
         student();
         course1.setName(course.getName());

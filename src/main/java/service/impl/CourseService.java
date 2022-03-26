@@ -16,7 +16,6 @@ public class CourseService {
         sessionFactory = SessionFactorySingleton.getInstance();
         courseRepository = new CourseRepository();
     }
-
     public List<Course> allCourse(){
         List<Course> list = null;
         try (var session = sessionFactory.getCurrentSession()) {
